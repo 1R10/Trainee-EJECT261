@@ -6,4 +6,4 @@ def Contas(request):
         'id': '1',
         'nome': 'Ryan'
     }
-    return JsonResponse(Contas)
+    return JsonResponse(conta)
