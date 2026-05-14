@@ -13,3 +13,4 @@ def Contas(request):
         'endereco':      ['rua', 'numero','bairro','cidade','estado','pais','continente'] # isso ta ok?
     }
     return JsonResponse(conta)
+
