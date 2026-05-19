@@ -10,5 +10,5 @@ def Contas(request):
         'cep':           '0000000000',
         'endereco':      ['rua', 'numero','bairro','cidade','estado','pais','continente'] # isso ta ok?
     }
-    return JsonResponse(conta)
+    return JsonResponse(Contas)
 
