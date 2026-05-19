@@ -1,6 +1,25 @@
+from Contas.serializers import ContaPadraoSerializer, ContaPadrao
+from rest_framework import viewsets
+
+class ContaPadraoViewSets(viewsets.ModelViewSet):
+    queryset = ContaPadrao.objects.all()
+    serializer_class = ContaPadraoSerializer
+
+
+
+
+
+
+
+
+
+
+
+
+
+''' salvando para revisitar depois caso necessário!
+
 from django.http import JsonResponse
-# Aqui gero os meus http's. Perguntar o motivo de não usar o https já que https>http. Concluir a trilha antes para sanar a dúvida nela se possível
-# Lembrar de enviar pras URL's na pasta mãe
 def Contas(request):
     conta = {
         'id':            '0',
@@ -14,3 +33,4 @@ def Contas(request):
     }
     return JsonResponse(conta)
 
+'''
