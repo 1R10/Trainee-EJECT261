@@ -1,14 +1,12 @@
 from django.http import JsonResponse
-def Contas(request):
+def Produtos(request):
     produto = {
         'id': '0',
-        'nomeProduto': 'Foguete',
-        'nascimento':    'dd/mm/aaaa',
-        'cpf':           '12345678910',
-        'email':         'tengotelengo@tengoede.carrapixo',
-        'senha':         'segredoveinaoexplana',
-        'cep':           '0000000000',
-        'endereco':      ['rua', 'numero','bairro','cidade','estado','pais','continente'] # isso ta ok?
+        'nomeProduto':        'Jaqueta Arrasa Foguetes',
+        'descricaoProduto':   'Jaqueta de algodão para focas de pelucia',
+        'precoProduto':       'R$999.99',
+        'tamanhoProduto':     'M',
+        'corProduto':         ['Vermelho', 'Preto', 'Azul']
     }
-    return JsonResponse(Contas)
+    return JsonResponse(Produtos)
 
