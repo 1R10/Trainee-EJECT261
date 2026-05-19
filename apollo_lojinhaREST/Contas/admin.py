@@ -1,14 +1,13 @@
 from django.contrib import admin
-from django.contrib.auth.models import AbstractUser
 from Contas.models import ContaPadrao
 
-'''class CadastrarUserAdmin(admin.ModelAdmin):
+class ContaPadraoAdmin(admin.ModelAdmin):
     list_display = ('role',
                     'nome_completo', 
                     'nascimento', 
                     'cpf',
-                    'email', 
-                    'senha', 
+                    #'email', 
+                    #'senha', 
                     'telefone', 
                     'cep', 
                     'endereco', )
@@ -17,6 +16,4 @@ from Contas.models import ContaPadrao
     list_per_page      = 20
     search_fields      = ('nome_completo',)
 
-admin.site.register(ContaPadrão, CadastrarUserAdmin)'''
-
-admin.site.register(ContaPadrao)
+admin.site.register(ContaPadrao,ContaPadraoAdmin)
