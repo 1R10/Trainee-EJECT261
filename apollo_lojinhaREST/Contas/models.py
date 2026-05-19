@@ -1,6 +1,17 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-class Cadastrar_user(models.Model):
+
+class ContaPadrao(AbstractUser):
+    ROLE = (
+        ('L', 'Lojista'),
+        ('C', 'Cliente'),
+    )
+    role          = models.TextField(choices=ROLE, default='C')
+  
+
+
+'''class ContaPadrão(models.Model):
     ROLE = (
         ('L', 'Lojista'),
         ('C', 'Cliente'),
@@ -16,9 +27,9 @@ class Cadastrar_user(models.Model):
     endereco      = models.TextField( blank= False)
 
     def __str__(self):
-        return self.nome_completo
-
-class Cadastrar_produto(models.Model):
+        return self.nome_completo'''
+      
+'''class Cadastrar_produto(models.Model):
     nome_produto      = models.CharField(max_length=200)
     preco_produto     = models.FloatField() 
 
@@ -30,4 +41,4 @@ class Cadastrar_produto(models.Model):
     descricao_produto = models.TextField()
 
     def __str__(self):
-        return self.nome_produto
+        return self.nome_produto'''
