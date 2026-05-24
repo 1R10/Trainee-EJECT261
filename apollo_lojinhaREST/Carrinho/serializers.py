@@ -1,9 +1,14 @@
 from rest_framework import serializers
-from .models import Carrinho
+from .models import Carrinho, ItemCarrinho
 
 class CarrinhoSerializer(serializers.ModelSerializer):
     class Meta: 
-        model = Carrinho
+        model  = Carrinho
         fields = '__all__'
 
        #6:00 https://cursos.alura.com.br/course/django-rest-framework-construindo-apis-restful-zero/task/159566
+
+class ItemCarrinhoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model  = ItemCarrinho
+        exclude = []
