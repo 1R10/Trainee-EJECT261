@@ -7,10 +7,11 @@ class ProdutoAdmin(admin.ModelAdmin):
                     'descricaoProduto',
                     'precoProduto',
                     'tamanhoProduto',
-                    'corProduto' )
+                    'corProduto',
+                    'estoqueProduto' )
     
     list_display_links = ('nomeProduto',)
     list_per_page      = 20
-    search_fields      = ('nomeProduto',)
+    search_fields      = ('nomeProduto','corProduto')
 
 admin.site.register(Produtos,ProdutoAdmin)

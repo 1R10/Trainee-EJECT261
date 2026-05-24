@@ -16,12 +16,12 @@ class Carrinho(models.Model):
     # Optei por fazer os itens a parte. O CASCADE deletaria tudo, então eu preciso de um modelo APENAS para o item do carrinho?
     # Fazer, mas confirmar com Rafa_gamer
     def __str__(self):
-        return f'DATA: {self.carrinhoData}, {self.usuario} --> {self.estado}'
+        return f'Carrinho de {self.usuario}, {self.estado} --> {self.carrinhoData}'
 
 class ItemCarrinho(models.Model):
-    carrinho   = models.ForeignKey(Carrinho, on_delete=models.CASCADE, verbose_name='ItemCarrinho')
-    produto    = models.ForeignKey(Produtos, on_delete=models.CASCADE, verbose_name='ProdutoItemCarrinho')
-    quantidade = models.PositiveIntegerField(default=1, verbose_name='QuantidadeItemCarrinho')
+    carrinho   = models.ForeignKey(Carrinho, on_delete=models.CASCADE, verbose_name='Item')
+    produto    = models.ForeignKey(Produtos, on_delete=models.CASCADE, verbose_name='Produto')
+    quantidade = models.PositiveIntegerField(default=1, verbose_name='Quantidade')
     
     def __str__(self):
         return f'{self.produto} x {self.quantidade}'
