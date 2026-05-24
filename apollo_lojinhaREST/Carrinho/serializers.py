@@ -6,9 +6,27 @@ class CarrinhoSerializer(serializers.ModelSerializer):
         model  = Carrinho
         fields = '__all__'
 
-       #6:00 https://cursos.alura.com.br/course/django-rest-framework-construindo-apis-restful-zero/task/159566
-
 class ItemCarrinhoSerializer(serializers.ModelSerializer):
     class Meta:
         model  = ItemCarrinho
         exclude = []
+
+class ListaCarrinhoPorContaSerializer(serializers.ModelSerializer):
+    carrinhoData = serializers.ReadOnlyField(source='Carrinho.carrinhoData')
+    estado       = serializers.SerializerMethodField()
+
+    class Meta:
+        model  = Carrinho
+        fields = ['estado', 'carrinhoData']
+
+    def get_estado(self, obj):
+        return obj.get_estado_display()
+    
+    
+class ListaItemPorCarrinhoSerializer(serializers.ModelSerializer):
+    produtoNome       = serializers.ReadOnlyField(source='Produto.nome')
+    produtoQuantidade = serializers.ReadOnlyField(source='ItemCarrinho.quantidade')
+    
+    class Meta:
+        model = ItemCarrinho
+        fields = ['produtoNome', 'produtoQuantidade']
