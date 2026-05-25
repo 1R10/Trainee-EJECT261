@@ -7,8 +7,8 @@ class Carrinho(models.Model):
         ('F', 'Fechado'),  # Histórico de compras
         ('C', 'Cancelado') # Cancelado vou deletar do banco
     )
-    usuario = models.ForeignKey(ContaPadrao, on_delete=models.CASCADE, verbose_name='Dono') # Usuário deletado, carrinho também.
-    estado  = models.CharField(choices=ESTADO, default='A', max_length=1, verbose_name='Estado')
+    usuario      = models.ForeignKey(ContaPadrao, on_delete=models.CASCADE, verbose_name='Dono') # Usuário deletado, carrinho também.
+    estado       = models.CharField(choices=ESTADO, default='A', max_length=1, verbose_name='Estado')
     carrinhoData = models.DateField(auto_now_add=True, verbose_name='Abertura')
 
 

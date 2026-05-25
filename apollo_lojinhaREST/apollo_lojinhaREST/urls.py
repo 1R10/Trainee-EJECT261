@@ -6,7 +6,7 @@ from Carrinho.views import CarrinhoViewSets, ItemCarrinhoViewSets, ListaCarrinho
 from rest_framework import routers
 
 router = routers.DefaultRouter()# rota, viewset, nome
-router.register('contas', ContaPadraoViewSets, basename='ContaPadrao')
+router.register('contas', ContaPadraoViewSets, basename='Contas')
 router.register('produtos', ProdutosViewSets, basename='Produtos')
 router.register('carrinho', CarrinhoViewSets, basename='Carrinhos')
 router.register('itemCarrinho', ItemCarrinhoViewSets, basename='ItensCarrinho')
@@ -17,6 +17,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('contas/<int:pkcontas>/carrinhos', ListaCarrinhoPorContaViewSet.as_view()),
-        path('contas/<int:pkcontas>/carrinhos/<int:pkcarrinhos>', ListaItemPorCarrinhoViewSet.as_view()),
+    path('contas/<int:pkcontas>/carrinhos/<int:pkcarrinhos>', ListaItemPorCarrinhoViewSet.as_view()),
 
 ]

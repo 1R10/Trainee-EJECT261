@@ -9,23 +9,24 @@ class CarrinhoSerializer(serializers.ModelSerializer):
 class ItemCarrinhoSerializer(serializers.ModelSerializer):
     class Meta:
         model  = ItemCarrinho
-        exclude = []
+        fields = '__all__'
+        # exclude = []
 
 class ListaCarrinhoPorContaSerializer(serializers.ModelSerializer):
-    carrinhoData = serializers.ReadOnlyField(source='Carrinho.carrinhoData')
-    estado       = serializers.SerializerMethodField()
+    aberturaCarrinhoData = serializers.ReadOnlyField(source='carrinhoData')
+    estado   = serializers.SerializerMethodField()
 
     class Meta:
         model  = Carrinho
-        fields = ['estado', 'carrinhoData']
+        fields = ['id', 'estado', 'aberturaCarrinhoData']
 
     def get_estado(self, obj):
-        return obj.get_estado_display()
+        return obj.get_estado_display() # isso aqui usa-se em campos salvos como ('a','aberto')
     
     
 class ListaItemPorCarrinhoSerializer(serializers.ModelSerializer):
-    produtoNome       = serializers.ReadOnlyField(source='Produto.nome')
-    produtoQuantidade = serializers.ReadOnlyField(source='ItemCarrinho.quantidade')
+    produtoNome       = serializers.ReadOnlyField(source='produto.nomeProduto')
+    produtoQuantidade = serializers.ReadOnlyField(source='quantidade')
     
     class Meta:
         model = ItemCarrinho
