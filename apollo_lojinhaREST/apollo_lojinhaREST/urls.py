@@ -5,7 +5,7 @@ from Produtos.views import ProdutosViewSets
 from Carrinho.views import CarrinhoViewSets, ItemCarrinhoViewSets, ListaCarrinhoPorContaViewSet, ListaItemPorCarrinhoViewSet
 from rest_framework import routers
 
-router = routers.DefaultRouter()# rota, viewset, nome
+router = routers.DefaultRouter()# rota, viewset, nome. são os que aparecem na API Root
 router.register('contas', ContaPadraoViewSets, basename='Contas')
 router.register('produtos', ProdutosViewSets, basename='Produtos')
 router.register('carrinho', CarrinhoViewSets, basename='Carrinhos')

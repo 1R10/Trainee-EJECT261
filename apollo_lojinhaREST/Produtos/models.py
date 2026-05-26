@@ -16,4 +16,4 @@ class Produtos(models.Model):
     estoqueProduto = models.PositiveIntegerField(default=0, verbose_name='Estoque')
 
     def __str__(self):
-        return self.nomeProduto
+        return f'{self.nomeProduto} - {self.corProduto} - {self.tamanhoProduto}'
