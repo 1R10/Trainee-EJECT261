@@ -1,18 +1,19 @@
 from Contas.serializers import ContaPadraoSerializer, ContaPadrao
 from rest_framework import viewsets
-from rest_framework.authentication import BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
 
 class ContaPadraoViewSets(viewsets.ModelViewSet):
-    authentication_classes = [BasicAuthentication]
-    permission_classes     = [IsAuthenticated]   
-    
+  
     queryset = ContaPadrao.objects.all()
     serializer_class = ContaPadraoSerializer
 
 
 
 ''' salvando para revisitar depois caso necessário!
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated # auth individual
+class bla bla bla(viewset.ModelViewSet):
+    authentication_classes = [BasicAuthentication]
+    permission_classes     = [IsAuthenticated]
 
 from django.http import JsonResponse
 def Contas(request):
