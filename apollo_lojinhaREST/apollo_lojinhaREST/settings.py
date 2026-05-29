@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'Produtos',
     'Carrinho',
     'rest_framework',
+    
 ]
 
 MIDDLEWARE = [
@@ -91,10 +92,11 @@ STATIC_URL = 'static/'
 
 REST_FRAMEWORK = { # Autenticação da API em modo global. 
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES':[ # PAdrão default de permissão. SEMPRE vai pedir
         'rest_framework.permissions.IsAuthenticated'
     ]
 }
+
+# continuar deste vídeo https://www.youtube.com/watch?v=LFV4MLe0ZzM

@@ -14,7 +14,8 @@ class ContaPadrao(AbstractUser):
     telefone      = models.TextField(max_length= 14, blank= False) 
     cep           = models.TextField(max_length= 10, blank= False)
     endereco      = models.TextField( blank= False)
-    REQUIRED_FIELDS = ['nome_completo', 'nascimento', 'cpf']
+    email         = models.EmailField(unique=True, blank= False) # Achava que daria erro com o drf, mas não dá!
+    REQUIRED_FIELDS = ['nome_completo', 'nascimento', 'cpf'] # Já vem com email e senha
         #senha         = models.TextField(max_length= 50, blank= False) # min 8 car, 1 maiuscula 1 especial
         
     def __str__(self):
