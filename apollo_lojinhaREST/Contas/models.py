@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from Validador_CPF import cpf_valido
+from .Validador_CPF import cpf_valido
 
 
 class ContaPadrao(AbstractUser):
