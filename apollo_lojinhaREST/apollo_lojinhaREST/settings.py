@@ -93,8 +93,9 @@ STATIC_URL = 'static/'
 REST_FRAMEWORK = { # Autenticação da API em modo global. 
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication', # Sem isso o popup n aparece
     ],
-    'DEFAULT_PERMISSION_CLASSES':[ # PAdrão default de permissão. SEMPRE vai pedir
+    'DEFAULT_PERMISSION_CLASSES':[
         'rest_framework.permissions.IsAuthenticated'
     ]
 }

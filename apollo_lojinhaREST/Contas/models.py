@@ -4,6 +4,8 @@ from .Validador_CPF import cpf_valido
 
 
 class ContaPadrao(AbstractUser):
+    #username      = None # Meu createsuperuser estava quebrando
+
     ROLE = (
         ('L', 'Lojista'),
         ('C', 'Cliente'),
@@ -23,10 +25,11 @@ class ContaPadrao(AbstractUser):
         if cpf_valido(self.cpf) == False:
             raise ValueError('CPF inválido.') # Talvez exista um melhor para o django
         
-    def save(self, *args, **kwargs):
+    def saves(self, *args, **kwargs):
         self.username = self.email
         self.validar()
-        super.save(*args, **kwargs)
+        super().save(*args, **kwargs)
         
     def __str__(self):
         return self.nome_completo
+    
