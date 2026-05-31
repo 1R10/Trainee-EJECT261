@@ -1,6 +1,7 @@
 from django.db import models
 from Contas.models import ContaPadrao
 from Produtos.models import Produtos
+
 class Carrinho(models.Model):
     ESTADO = (
         ('A', 'Aberto'),   # Carrinho atual
@@ -11,10 +12,6 @@ class Carrinho(models.Model):
     estado       = models.CharField(choices=ESTADO, default='A', max_length=1, verbose_name='Estado')
     carrinhoData = models.DateField(auto_now_add=True, verbose_name='Abertura')
 
-
-
-    # Optei por fazer os itens a parte. O CASCADE deletaria tudo, então eu preciso de um modelo APENAS para o item do carrinho?
-    # Fazer, mas confirmar com Rafa_gamer
     def __str__(self):
         return f'{self.usuario} - {self.estado} - {self.id}'
 

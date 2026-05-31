@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from Validador_CPF import cpf_valido
 
 
 class ContaPadrao(AbstractUser):
@@ -14,9 +15,18 @@ class ContaPadrao(AbstractUser):
     telefone      = models.TextField(max_length= 14, blank= False) 
     cep           = models.TextField(max_length= 10, blank= False)
     endereco      = models.TextField( blank= False)
-    email         = models.EmailField(unique=True, blank= False) # Achava que daria erro com o drf, mas não dá!
-    REQUIRED_FIELDS = ['nome_completo', 'nascimento', 'cpf'] # Já vem com email e senha
-        #senha         = models.TextField(max_length= 50, blank= False) # min 8 car, 1 maiuscula 1 especial
+    email         = models.EmailField(unique=True, blank= False)
+    USERNAME_FIELD  = 'email'
+    REQUIRED_FIELDS = ['nome_completo', 'nascimento', 'cpf']
+    
+    def validar(self):
+        if cpf_valido(self.cpf) == False:
+            raise ValueError('CPF inválido.') # Talvez exista um melhor para o django
+        
+    def save(self, *args, **kwargs):
+        self.username = self.email
+        self.validar()
+        super.save(*args, **kwargs)
         
     def __str__(self):
         return self.nome_completo
