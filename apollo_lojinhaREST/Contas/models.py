@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 #from django.core.validators import MinLengthValidator
-from .Validador_CPF import cpf_valido
 
 
 class ContaPadrao(AbstractUser):
@@ -20,14 +19,9 @@ class ContaPadrao(AbstractUser):
     #senha         = models.fielddesenha(validators=[MinLengthValidator(8)]) ainda falta um maiúsculo e !@.# estudar doc AbstractUser
     USERNAME_FIELD  = 'email'
     REQUIRED_FIELDS = ['username', 'nome_completo', 'nascimento', 'cpf']
-    
-    def validar(self): # isso aqui e nada são ==
-        if cpf_valido(self.cpf) == False:
-            raise ValueError('CPF inválido.') # Talvez exista um melhor para o django
         
     def saves(self, *args, **kwargs):
         self.username = self.email
-        self.validar()
         super().save(*args, **kwargs)
         
     def __str__(self):
