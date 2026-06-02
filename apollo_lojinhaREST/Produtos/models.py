@@ -9,6 +9,7 @@ class Produtos(models.Model):
 
     def __str__(self):
         return f'{self.nomeProduto}'
+    
 class VariacaoProduto(models.Model):
     '''Aqui será cadastrada a variação com base em um obj de Produtos'''
 

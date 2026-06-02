@@ -13,11 +13,12 @@ class Carrinho(models.Model):
     carrinhoData = models.DateField(auto_now_add=True, verbose_name='Abertura')
 
     def __str__(self):
-        return f'{self.usuario} - {self.estado} - {self.id}'
+        return f'{self.usuario} - {self.estado} - {self.carrinhoData}'
 
 class ItemCarrinho(models.Model):
     carrinho   = models.ForeignKey(Carrinho, on_delete=models.CASCADE, verbose_name='Carrinho')
     produto    = models.ForeignKey(Produtos, on_delete=models.CASCADE, verbose_name='Produto')
+    variacao   = models.ForeignKey(VariacaoProduto, on_delete=models.CASCADE, verbose_name='Variação')
     quantidade = models.PositiveIntegerField(default=1, verbose_name='Quantidade')
     
     def __str__(self):
