@@ -17,7 +17,7 @@ class ContaPadrao(AbstractUser):
     cep           = models.TextField(max_length= 10, blank= False)
     endereco      = models.TextField( blank= False)
     email         = models.EmailField(unique=True, blank= False)
-    #senha         = models.fielddesenha(MinLengthValidator(8)) ainda falta um maiúsculo e !@.# estudar doc AbstractUser
+    #senha         = models.fielddesenha(validators=[MinLengthValidator(8)]) ainda falta um maiúsculo e !@.# estudar doc AbstractUser
     USERNAME_FIELD  = 'email'
     REQUIRED_FIELDS = ['username', 'nome_completo', 'nascimento', 'cpf']
     
