@@ -2,10 +2,10 @@ from django.db import models
 
 class Produtos(models.Model):
     '''Aqui será cadastrado o produto'''
-    
+
     nomeProduto      = models.CharField(max_length=200, blank= False, verbose_name='Nome')
     descricaoProduto = models.TextField(verbose_name='Descrição')
-    precoProduto     = models.DecimalField(blank=False, verbose_name='Preço')
+    precoProduto     = models.DecimalField(blank=False,default=0, decimal_places=2,max_digits=999999, verbose_name='Preço')
 
     def __str__(self):
         return f'{self.nomeProduto}'
