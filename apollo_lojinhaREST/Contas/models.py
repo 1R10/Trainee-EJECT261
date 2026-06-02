@@ -1,11 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+#from django.core.validators import MinLengthValidator
 from .Validador_CPF import cpf_valido
 
 
 class ContaPadrao(AbstractUser):
-    #username      = None # Meu createsuperuser estava quebrando
-
     ROLE = (
         ('L', 'Lojista'),
         ('C', 'Cliente'),
@@ -18,6 +17,7 @@ class ContaPadrao(AbstractUser):
     cep           = models.TextField(max_length= 10, blank= False)
     endereco      = models.TextField( blank= False)
     email         = models.EmailField(unique=True, blank= False)
+    #senha         = models.fielddesenha(MinLengthValidator(8)) ainda falta um maiúsculo e !@.# estudar doc AbstractUser
     USERNAME_FIELD  = 'email'
     REQUIRED_FIELDS = ['username', 'nome_completo', 'nascimento', 'cpf']
     
