@@ -17,7 +17,12 @@ class ContaPadraoSerializer(serializers.ModelSerializer):
                 'is_active',
                 'date_joined']
         
-    def validate_cpf(self, cpf): 
-        if cpf_valido(cpf) == False:
-            raise serializers.ValidationError('CPF inválido.') 
-        return cpf
+    def validate(self, dados): 
+        if cpf_valido(dados['cpf']) == False:
+            raise serializers.ValidationError({'cpf':'CPF inválido.'}) 
+        
+        if not dados['nome_completo'.isalpha()]:
+            raise serializers.ValidationError({'nome_completo': 'O nome só pode conter letras.'})
+        if len(dados['telefone']) != 13:
+            raise serializers.ValidationError({'telefone': 'Telefone deve conter 13 dígitos.'})
+        return dados
