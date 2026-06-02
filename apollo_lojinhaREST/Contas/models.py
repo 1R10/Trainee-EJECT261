@@ -13,7 +13,7 @@ class ContaPadrao(AbstractUser):
     role          = models.TextField(choices=ROLE, default='C')
     nome_completo = models.CharField(max_length=100, blank= False)
     nascimento    = models.DateField(blank= False)
-    cpf           = models.CharField(max_length= 11, blank= False)
+    cpf           = models.CharField(max_length= 11, blank= False, unique= True)
     telefone      = models.TextField(max_length= 14, blank= False) 
     cep           = models.TextField(max_length= 10, blank= False)
     endereco      = models.TextField( blank= False)
@@ -21,7 +21,7 @@ class ContaPadrao(AbstractUser):
     USERNAME_FIELD  = 'email'
     REQUIRED_FIELDS = ['username', 'nome_completo', 'nascimento', 'cpf']
     
-    def validar(self):
+    def validar(self): # isso aqui e nada são ==
         if cpf_valido(self.cpf) == False:
             raise ValueError('CPF inválido.') # Talvez exista um melhor para o django
         
