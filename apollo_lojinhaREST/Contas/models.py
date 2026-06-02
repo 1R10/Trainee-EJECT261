@@ -19,7 +19,7 @@ class ContaPadrao(AbstractUser):
     endereco      = models.TextField( blank= False)
     email         = models.EmailField(unique=True, blank= False)
     USERNAME_FIELD  = 'email'
-    REQUIRED_FIELDS = ['nome_completo', 'nascimento', 'cpf']
+    REQUIRED_FIELDS = ['username', 'nome_completo', 'nascimento', 'cpf']
     
     def validar(self):
         if cpf_valido(self.cpf) == False:
