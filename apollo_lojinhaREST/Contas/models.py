@@ -20,7 +20,7 @@ class ContaPadrao(AbstractUser):
     USERNAME_FIELD  = 'email'
     REQUIRED_FIELDS = ['username', 'nome_completo', 'nascimento', 'cpf']
         
-    def saves(self, *args, **kwargs):
+    def save(self, *args, **kwargs):
         self.username = self.email
         super().save(*args, **kwargs)
         

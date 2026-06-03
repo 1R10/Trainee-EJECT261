@@ -6,7 +6,7 @@ class ContaPadraoSerializer(serializers.ModelSerializer):
     class Meta: 
         model = ContaPadrao
         exclude = [
-                #'username', deu bronca
+                'username'
                 'user_permissions',
                 'groups', 
                 'first_name',
