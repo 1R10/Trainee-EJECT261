@@ -25,4 +25,7 @@ class ContaPadraoSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({'nome_completo': 'O nome só pode conter letras.'})
         if len(dados['telefone']) != 13:
             raise serializers.ValidationError({'telefone': 'Telefone deve conter 13 dígitos.'})
+        if not str(dados['cep']).isdigit():
+            return serializers.ValidationError({'cep': 'CEP inválido. Insira apenas números.'})
+
         return dados

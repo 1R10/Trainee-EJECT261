@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-#from django.core.validators import MinLengthValidator
+from django.core.validators import MinLengthValidator
 
 
 class ContaPadrao(AbstractUser):
@@ -13,11 +13,10 @@ class ContaPadrao(AbstractUser):
     nascimento    = models.DateField(blank= False)
     cpf           = models.CharField(max_length= 11, blank= False, unique= True)
     telefone      = models.TextField(max_length= 14, blank= False) 
-    cep           = models.TextField(max_length= 10, blank= False)
+    cep           = models.TextField(max_length= 8, validators=[MinLengthValidator(8)], blank= False)
     endereco      = models.TextField( blank= False)
     email         = models.EmailField(unique=True, blank= False)
-    #senha         = models.fielddesenha(validators=[MinLengthValidator(8)]) ainda falta um maiúsculo e !@.# estudar doc AbstractUser
-    USERNAME_FIELD  = 'email'
+    #senha: validação deve ocorrer no settings.py. O abstract user apenas codifica em hash       
     REQUIRED_FIELDS = ['username', 'nome_completo', 'nascimento', 'cpf']
         
     def save(self, *args, **kwargs):
