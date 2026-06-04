@@ -4,7 +4,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 class ContaPadraoViewSets(viewsets.ModelViewSet):
   
-    queryset = ContaPadrao.objects.all()
+    queryset = ContaPadrao.objects.all().order_by('id')
     serializer_class = ContaPadraoSerializer
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter, filters.SearchFilter]
     ordering_fields = ['nome_completo', 'id']
