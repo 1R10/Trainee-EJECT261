@@ -100,6 +100,14 @@ REST_FRAMEWORK = { # Autenticação da API em modo global.
         'rest_framework.permissions.IsAuthenticated'
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination', # paginar por numero de pagina
-    'PAGE_SIZE': 2
+    'PAGE_SIZE': 2,
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '1/day', # nao importa mt. nao tem como acessar offline
+        'user': '999999/day'
+    }
 }
 
