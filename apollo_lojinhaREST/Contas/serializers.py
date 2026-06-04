@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from Contas.models import ContaPadrao
-from .Validador_CPF import cpf_valido
+from .validators import cpf_valido, telefone_valido, cep_valido, nome_valido
 
 class ContaPadraoSerializer(serializers.ModelSerializer):
     class Meta: 
@@ -21,12 +21,12 @@ class ContaPadraoSerializer(serializers.ModelSerializer):
         if not cpf_valido(str(dados['cpf'])):
             raise serializers.ValidationError({'cpf':'CPF inválido.'}) 
         
-        if not str(dados['nome_completo']).isalpha():
+        if not nome_valido(dados['nome_completo']):
             raise serializers.ValidationError({'nome_completo': 'O nome só pode conter letras.'})
-        if len(dados['telefone']) != 11:
-            raise serializers.ValidationError({'telefone': 'Telefone deve conter 13 dígitos.'})
-        if not str(dados['cep']).isdigit():
-            raise serializers.ValidationError({'cep': 'CEP inválido. Insira apenas números.'})
+        if not telefone_valido(dados['telefone']):
+            raise serializers.ValidationError({'telefone': 'Telefone deve conter formato 00 00000-0000.'})
+        if not cep_valido(dados['cep']):
+            raise serializers.ValidationError({'cep': 'CEP inválido. Formato 00000-000.'})
 
 
         return dados

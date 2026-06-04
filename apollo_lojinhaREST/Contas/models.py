@@ -13,12 +13,12 @@ class ContaPadrao(AbstractUser):
     nome_completo = models.CharField(max_length=100, blank= False)
     nascimento    = models.DateField(blank= False)
     cpf           = models.CharField(max_length= 11, blank= False, unique= True)
-    telefone      = models.TextField(max_length= 11, validators=[MinLengthValidator(11)], blank= False) 
-    cep           = models.TextField(max_length= 8 , validators=[MinLengthValidator(8)],  blank= False)
+    telefone      = models.TextField(max_length= 13,  blank= False) 
+    cep           = models.TextField(max_length= 9,  blank= False)
     endereco      = models.TextField( blank= False) # utilizar o encontraCEP
     email         = models.EmailField(unique=True, blank= False)
     #senha: validação deve ocorrer no settings.py. O abstract user apenas codifica em hash       
-    REQUIRED_FIELDS = [ 'nome_completo', 'nascimento', 'cpf']
+    REQUIRED_FIELDS = [ 'email', 'nome_completo', 'nascimento', 'cpf']
         
     def save(self, *args, **kwargs):
         self.username = self.email

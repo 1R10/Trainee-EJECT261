@@ -1,3 +1,5 @@
+import re
+
 def cpf_valido (cpf : str):
     if type(cpf) != str:
 
@@ -30,4 +32,19 @@ def cpf_valido (cpf : str):
 
         return False
     
+    return True
+
+def telefone_valido(telefone):
+    numero = '[0-9]{2} [9]{1}[0-9]{4}-[0-9]{4}'
+    resposta = re.findall(numero,telefone)
+    return resposta
+
+def cep_valido(cep):
+    numero = '[0-9]{5}-[0-9]{3}'
+    resposta = re.findall(numero,cep)
+    return resposta
+
+def nome_valido(nome_completo:str):
+    if not (nome_completo.replace(' ', '')).isalpha():
+        return False
     return True
