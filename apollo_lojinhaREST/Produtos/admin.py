@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from Produtos.models import Produtos, VariacaoProduto
+from Produtos.models import Produto, VariacaoProduto
 
 class ProdutoAdmin(admin.ModelAdmin):
     list_display = (
@@ -14,7 +14,7 @@ class ProdutoAdmin(admin.ModelAdmin):
     search_fields      = ('nomeProduto',)
     ordering           = ('nomeProduto', 'precoProduto')
 
-admin.site.register(Produtos,ProdutoAdmin)
+admin.site.register(Produto,ProdutoAdmin)
 
 class VariacaoProdutoAdmin(admin.ModelAdmin):
     list_display = ('produto',

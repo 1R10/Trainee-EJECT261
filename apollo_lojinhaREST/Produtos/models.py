@@ -1,6 +1,6 @@
 from django.db import models
 
-class Produtos(models.Model):
+class Produto(models.Model):
     '''Aqui será cadastrado o produto'''
 
     nomeProduto      = models.CharField(max_length=200, blank= False, verbose_name='Nome')
@@ -13,7 +13,7 @@ class Produtos(models.Model):
 class VariacaoProduto(models.Model):
     '''Aqui será cadastrada a variação com base em um obj de Produtos'''
 
-    produto           = models.ForeignKey(Produtos, on_delete=models.CASCADE, verbose_name='Produto') # provavelmente tem um produto.nomeProduto
+    produto           = models.ForeignKey(Produto, on_delete=models.CASCADE, verbose_name='Produto') # provavelmente tem um produto.nomeProduto
     TAMANHOPRODUTO   = (
         ('p' , 'P'),
         ('m' , 'M'),

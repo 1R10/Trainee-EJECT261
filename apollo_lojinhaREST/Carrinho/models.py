@@ -1,6 +1,6 @@
 from django.db import models
 from Contas.models import ContaPadrao
-from Produtos.models import Produtos,VariacaoProduto
+from Produtos.models import Produto,VariacaoProduto
 
 class Carrinho(models.Model):
     ESTADO = (
@@ -17,7 +17,7 @@ class Carrinho(models.Model):
 
 class ItemCarrinho(models.Model):
     carrinho   = models.ForeignKey(Carrinho, on_delete=models.CASCADE, verbose_name='Carrinho')
-    produto    = models.ForeignKey(Produtos, on_delete=models.CASCADE, verbose_name='Produto')
+    produto    = models.ForeignKey(Produto, on_delete=models.CASCADE, verbose_name='Produto')
     variacao   = models.ForeignKey(VariacaoProduto, on_delete=models.CASCADE, verbose_name='Variação')
     quantidade = models.PositiveIntegerField(default=1, verbose_name='Quantidade')
     

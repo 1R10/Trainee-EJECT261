@@ -96,8 +96,8 @@ REST_FRAMEWORK = { # Autenticação da API em modo global.
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication', # Sem isso o popup n aparece
     ],
-    'DEFAULT_PERMISSION_CLASSES':[ # só vai logar se estiver auth
-        'rest_framework.permissions.IsAuthenticated'
+    'DEFAULT_PERMISSION_CLASSES':[
+        'rest_framework.permissions.DjangoModelPermissions' # IsAuthenticated
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination', # paginar por numero de pagina
     'PAGE_SIZE': 2,
