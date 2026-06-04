@@ -6,7 +6,7 @@ class ContaPadraoSerializer(serializers.ModelSerializer):
     class Meta: 
         model = ContaPadrao
         exclude = [
-                'username'
+                'username',
                 'user_permissions',
                 'groups', 
                 'first_name',
@@ -18,14 +18,15 @@ class ContaPadraoSerializer(serializers.ModelSerializer):
                 'date_joined']
         
     def validate(self, dados): 
-        if cpf_valido(dados['cpf']) == False:
+        if not cpf_valido(str(dados['cpf'])):
             raise serializers.ValidationError({'cpf':'CPF inválido.'}) 
         
-        if not dados['nome_completo'.isalpha()]:
+        if not str(dados['nome_completo']).isalpha():
             raise serializers.ValidationError({'nome_completo': 'O nome só pode conter letras.'})
-        if len(dados['telefone']) != 13:
+        if len(dados['telefone']) != 11:
             raise serializers.ValidationError({'telefone': 'Telefone deve conter 13 dígitos.'})
         if not str(dados['cep']).isdigit():
-            return serializers.ValidationError({'cep': 'CEP inválido. Insira apenas números.'})
+            raise serializers.ValidationError({'cep': 'CEP inválido. Insira apenas números.'})
+
 
         return dados
