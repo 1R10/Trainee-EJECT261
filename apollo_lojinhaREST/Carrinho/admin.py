@@ -2,13 +2,13 @@ from django.contrib import admin
 from Carrinho.models import Carrinho, ItemCarrinho
 
 class CarrinhoAdmin(admin.ModelAdmin):
-    list_display = ('usuario',
+    list_display = ('dono',
                     'estado',
                     'carrinhoData',)
     
-    list_display_links = ('usuario', 'carrinhoData')
+    list_display_links = ('dono', 'carrinhoData')
     list_per_page      = 10
-    search_fields      = ('usuario', 'carrinhoData')
+    search_fields      = ('dono', 'carrinhoData')
     ordering           = ('carrinhoData',)
 
 admin.site.register(Carrinho,CarrinhoAdmin)

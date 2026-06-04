@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='carrinho',
-            name='usuario',
+            name='dono',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Dono'),
         ),
         migrations.AddField(

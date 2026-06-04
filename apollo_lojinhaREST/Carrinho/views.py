@@ -19,7 +19,7 @@ class ItemCarrinhoViewSets(viewsets.ModelViewSet): # nao precisa de filtro de pa
 
 class ListaCarrinhoPorContaViewSet(generics.ListAPIView):
     def get_queryset(self):
-        queryset = Carrinho.objects.filter(usuario_id=self.kwargs['pkcontas']).order_by('id') # primary key
+        queryset = Carrinho.objects.filter(dono_id=self.kwargs['pkcontas']).order_by('id') # primary key
         return queryset
     serializer_class = ListaCarrinhoPorContaSerializer
 
