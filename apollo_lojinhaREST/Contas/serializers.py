@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from Contas.models import ContaPadrao
 from .validators import cpf_valido, telefone_valido, cep_valido, nome_valido
+from django.contrib.auth.password_validation import validate_password
+
 
 class ContaPadraoSerializer(serializers.ModelSerializer):
     class Meta: 
@@ -18,6 +20,7 @@ class ContaPadraoSerializer(serializers.ModelSerializer):
                 'date_joined']
         
     def validate(self, dados): 
+        validate_password(dados['password']) # isso lê as regras do settings
         if not cpf_valido(str(dados['cpf'])):
             raise serializers.ValidationError({'cpf':'CPF inválido.'}) 
         
