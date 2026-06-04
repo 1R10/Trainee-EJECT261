@@ -14,6 +14,7 @@ class ContaPadraoAdmin(admin.ModelAdmin):
     
     list_display_links = ('role', 'nome_completo',)
     list_per_page      = 20
-    search_fields      = ('nome_completo',)
+    search_fields      = ('nome_completo','cpf',)
+    ordering           = ('nome_completo',)
 
 admin.site.register(ContaPadrao,ContaPadraoAdmin)

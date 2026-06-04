@@ -1,10 +1,15 @@
 from Contas.serializers import ContaPadraoSerializer, ContaPadrao
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
+from django_filters.rest_framework import DjangoFilterBackend
 
 class ContaPadraoViewSets(viewsets.ModelViewSet):
   
     queryset = ContaPadrao.objects.all()
     serializer_class = ContaPadraoSerializer
+    filter_backends = [DjangoFilterBackend,filters.OrderingFilter, filters.SearchFilter]
+    ordering_fields = ['nome_completo', 'id']
+    search_fields   = ['nome_completo', 'cpf']
+    ordering = ['nome_completo'] # ordenação padrão
 
 
 
