@@ -19,7 +19,7 @@ class ContaPadrao(AbstractUser):
     cep           = models.TextField(max_length= 9,  blank= False)
     endereco      = models.TextField(blank=True) # utiliza o encontraCEP
     email         = models.EmailField(unique=True, blank= False)
-    REQUIRED_FIELDS = [ 'email', 'nome_completo', 'nascimento', 'cpf']
+    REQUIRED_FIELDS = [ 'email', 'nome_completo', 'nascimento', 'cpf','role']
         
     def save(self, *args, **kwargs):
         self.username = self.email
