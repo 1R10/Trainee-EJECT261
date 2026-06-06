@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.core.validators import MinLengthValidator
+#from django.core.validators import MinLengthValidator
+from django.contrib.auth.models import Group
+
 #from . import encontraCEP
 
 
@@ -17,12 +19,20 @@ class ContaPadrao(AbstractUser):
     cep           = models.TextField(max_length= 9,  blank= False)
     endereco      = models.TextField( blank= False) # utilizar o encontraCEP
     email         = models.EmailField(unique=True, blank= False)
-    #senha: validação deve ocorrer no settings.py. O abstract user apenas codifica em hash       
+    groups        = models.TextField(choices=ROLE, default='C')
     REQUIRED_FIELDS = [ 'email', 'nome_completo', 'nascimento', 'cpf']
         
     def save(self, *args, **kwargs):
         self.username = self.email
         super().save(*args, **kwargs)
+
+        if self.role == 'L':
+            nome_grupo = 'Lojista'
+        else:
+            nome_grupo = 'Cliente'
+    
+        grupo = Group.objects.get(name=nome_grupo)
+        self.groups.set([grupo])
         
     def __str__(self):
         return self.nome_completo
