@@ -112,7 +112,7 @@ REST_FRAMEWORK = { # Autenticação da API em modo global.
         'rest_framework.throttling.UserRateThrottle'
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '1/day', # nao importa mt. nao tem como acessar offline
+        'anon': '1234567/day', # nao importa mt. nao tem como acessar offline
         'user': '999999/day'
     }
 }

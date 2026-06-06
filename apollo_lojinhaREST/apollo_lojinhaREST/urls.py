@@ -7,10 +7,10 @@ from rest_framework import routers
 from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
 
 router = routers.DefaultRouter()# rota, viewset, nome. são os que aparecem na API Root
-router.register('contas', ContaPadraoViewSets, basename='Contas') # auth/register
-router.register('produtos', ProdutosViewSets, basename='Produtos')
+router.register('auth/register', ContaPadraoViewSets, basename='Contas')
+router.register('products', ProdutosViewSets, basename='Produtos')
 router.register('variacao', VariacaoProdutoViewSets, basename='Variação de produto')
-router.register('carrinho', CarrinhoViewSets, basename='Carrinhos')
+router.register('cart', CarrinhoViewSets, basename='Carrinhos')
 router.register('itemCarrinho', ItemCarrinhoViewSets, basename='ItensCarrinho')
 
 
@@ -21,7 +21,8 @@ urlpatterns = [
     path('', include(router.urls)),
     path('contas/<int:pkcontas>/carrinhos', ListaCarrinhoPorContaViewSet.as_view()),
     path('contas/<int:pkcontas>/carrinhos/<int:pkcarrinhos>', ListaItemPorCarrinhoViewSet.as_view()),
-    path('token/', TokenObtainPairView.as_view()),
-    path('token/refresh', TokenRefreshView.as_view()),
+    path('auth/login', TokenObtainPairView.as_view()), # token/        - ok
+    path('auth/refresh', TokenRefreshView.as_view()), # token/refresh  - ok
+
 
 ]

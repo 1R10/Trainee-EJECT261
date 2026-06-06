@@ -1,7 +1,7 @@
 from Contas.serializers import ContaPadraoSerializer, ContaPadrao
 from rest_framework import viewsets, filters
 from django_filters.rest_framework import DjangoFilterBackend
-
+from rest_framework.permissions import AllowAny
 class ContaPadraoViewSets(viewsets.ModelViewSet):
   
     queryset = ContaPadrao.objects.all().order_by('id')
@@ -10,6 +10,7 @@ class ContaPadraoViewSets(viewsets.ModelViewSet):
     ordering_fields = ['nome_completo', 'id']
     search_fields   = ['nome_completo', 'cpf']
     ordering = ['nome_completo'] # ordenação padrão
+    permission_classes = [AllowAny]
 
 
 
