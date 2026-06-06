@@ -40,7 +40,7 @@ def telefone_valido(telefone):
     return resposta
 
 def cep_valido(cep):
-    numero = '[0-9]{5}-[0-9]{3}'
+    numero = '[0-9]{8}'
     resposta = re.findall(numero,cep)
     return resposta
 

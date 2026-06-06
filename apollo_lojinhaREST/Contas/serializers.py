@@ -2,6 +2,7 @@ from rest_framework import serializers
 from Contas.models import ContaPadrao
 from .validators import cpf_valido, telefone_valido, cep_valido, nome_valido
 from django.contrib.auth.password_validation import validate_password
+from .encontraCEP import buscar_endereco
 
 
 class ContaPadraoSerializer(serializers.ModelSerializer):
@@ -29,7 +30,9 @@ class ContaPadraoSerializer(serializers.ModelSerializer):
         if not telefone_valido(dados['telefone']):
             raise serializers.ValidationError({'telefone': 'Telefone deve conter formato 00 00000-0000.'})
         if not cep_valido(dados['cep']):
-            raise serializers.ValidationError({'cep': 'CEP inválido. Formato 00000-000.'})
+            raise serializers.ValidationError({'cep': 'CEP inválido. Formato 12345678.'})
+        if cep_valido(dados['cep']):
+            dados['endereco'] = buscar_endereco(dados['cep'])
 
 
         return dados
