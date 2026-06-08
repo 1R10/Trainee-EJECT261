@@ -9,9 +9,9 @@ from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
 router = routers.DefaultRouter()# rota, viewset, nome. são os que aparecem na API Root
 router.register('auth/register', ContaPadraoViewSets, basename='Contas')
 router.register('products', ProdutosViewSets, basename='Produtos')
-router.register('variacao', VariacaoProdutoViewSets, basename='Variação de produto')
+router.register('variations', VariacaoProdutoViewSets, basename='Variação de produto')
 router.register('cart', CarrinhoViewSets, basename='Carrinhos')
-router.register('itemCarrinho', ItemCarrinhoViewSets, basename='ItensCarrinho')
+router.register('itemCarrinho', ItemCarrinhoViewSets, basename='Itens  no carrinho')
 
 
 

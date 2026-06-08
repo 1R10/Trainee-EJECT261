@@ -22,7 +22,9 @@ class ItemCarrinhoViewSets(viewsets.ModelViewSet): # nao precisa de filtro de pa
         if self.request.method in ['POST', 'PUT', 'PATCH']:
             self.permission_classes = [PermissionCliente]
 
-        return [IsAuthenticated]
+        else:
+            self.permission_classes = [IsAuthenticated]
+        return super().get_permissions()
     
     queryset = ItemCarrinho.objects.all().order_by('id')
     serializer_class = ItemCarrinhoSerializer

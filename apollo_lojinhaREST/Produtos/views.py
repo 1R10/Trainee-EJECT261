@@ -6,9 +6,11 @@ from Contas.permissions import PermissionLojista
 
 class ProdutosViewSets(viewsets.ModelViewSet):  
     def get_permissions(self):
-        if self.request.method in ['POST', 'PUT', 'PATCH', 'DELETE']:
+        if self.request.method in ['POST', 'PUT', 'PATCH', 'DELETE', 'GET']:
             self.permission_classes = [PermissionLojista]
-        return [IsAuthenticated]
+        else:
+            self.permission_classes = [IsAuthenticated]
+        return super().get_permissions()
     
     queryset = Produto.objects.all().order_by('precoProduto').order_by('id')
     serializer_class = ProdutosSerializer
@@ -20,7 +22,9 @@ class VariacaoProdutoViewSets(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.request.method in ['POST', 'PUT', 'PATCH', 'DELETE']:
             self.permission_classes = [PermissionLojista]
-        return [IsAuthenticated]
+        else:
+            self.permission_classes = [IsAuthenticated]
+        return super().get_permissions()
     
     queryset = VariacaoProduto.objects.all().order_by('id')
     serializer_class = VariacaoProdutoSerializer
