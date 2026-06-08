@@ -23,6 +23,8 @@ urlpatterns = [
     path('contas/<int:pkcontas>/carrinhos/<int:pkcarrinhos>', ListaItemPorCarrinhoViewSet.as_view()),
     path('auth/login', TokenObtainPairView.as_view()), # token/        - ok
     path('auth/refresh', TokenRefreshView.as_view()), # token/refresh  - ok
+    #path('auth/forgot-password',EsqueciSenha.as_view()),
+    #path('auth/forgot-password',RecuperarSenha.as_view()),
 
 
 ]

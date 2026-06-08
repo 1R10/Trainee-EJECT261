@@ -2,6 +2,8 @@ import re
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 
+# isso aqui se joga no settings e vai pro serializer
+
 class validatorSenha():
     def validate(self, senha, user=None):
         self.maiuscula(senha)

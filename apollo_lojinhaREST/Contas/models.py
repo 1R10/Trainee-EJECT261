@@ -24,14 +24,6 @@ class ContaPadrao(AbstractUser):
     def save(self, *args, **kwargs):
         self.username = self.email
         super().save(*args, **kwargs)
-
-        if self.role == 'L':
-            nome_grupo = 'Lojista'
-        else:
-            nome_grupo = 'Cliente'
-    
-        grupo = Group.objects.get(name=nome_grupo)
-        self.groups.set([grupo])
         
     def __str__(self):
         return self.nome_completo

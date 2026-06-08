@@ -6,6 +6,8 @@ from .encontraCEP import buscar_endereco
 
 
 class ContaPadraoSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
     class Meta: 
         model = ContaPadrao
         exclude = [
@@ -36,3 +38,8 @@ class ContaPadraoSerializer(serializers.ModelSerializer):
 
 
         return dados
+    
+    def create(self,dados):
+        dados['username'] = dados['email']
+        conta = ContaPadrao.objects.create_user(**dados)
+        return conta
