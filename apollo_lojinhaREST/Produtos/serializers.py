@@ -19,6 +19,17 @@ class VariacaoProdutoSerializer(serializers.ModelSerializer):
         model = VariacaoProduto
         fields = '__all__'
     def validate(self, dados):
+        variacao = VariacaoProduto.objects.filter(
+            produto = dados['produto'],
+            corProduto = dados['corProduto'],
+            tamanhoProduto = dados['tamanhoProduto']
+        )
+        if self.instance:
+            variacao = variacao.exclude(pk=self.instance.pk) # olha pra si e apaga pra ñ gerar duplicidade.
+        if variacao.exists():
+            raise serializers.ValidationError({'Cadastro duplo': 'Variação já cadastrada previamente.'})
+
+
         if not corProduto_valido(dados['corProduto']):
             raise serializers.ValidationError({'corProduto': 'Não pode conter caracteres especiais.'})
         
