@@ -22,4 +22,4 @@ def quantidade_validator(quantidade: int, variacao):
     print(f"AQUIIIIIIIIIIIIIII --------------------> {variacao.estoqueProduto}")
     if quantidade > variacao.estoqueProduto:
         return False
-    return True
+    return True # lembrar: o estoque não é removido aqui. só no "caixa"

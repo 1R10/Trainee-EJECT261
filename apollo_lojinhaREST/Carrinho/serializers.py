@@ -44,3 +44,5 @@ class ListaItemPorCarrinhoSerializer(serializers.ModelSerializer):
     class Meta:
         model = ItemCarrinho
         fields = ['produtoNome', 'produtoQuantidade']
+
+        
