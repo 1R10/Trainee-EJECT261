@@ -9,8 +9,11 @@ def nomeProduto_valido(nomeProduto:str):
 # descriçãoProduto não tem o que fazer.
 
 def precoProduto_valido(precoProduto: float):
+    if precoProduto == None:
+        return False
     if precoProduto < 0: # Preço pode ser zero sem promoção (?)
         return False
+    
     return True
 
 # tamanhoProduto não tem o que fazer.
