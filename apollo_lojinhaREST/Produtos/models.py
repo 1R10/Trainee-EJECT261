@@ -1,6 +1,6 @@
 from django.db import models
 
-class Produto(models.Model):
+class Produto(models.Model): 
     '''Aqui será cadastrado o produto'''
 
     nomeProduto      = models.CharField(max_length=200, blank= False, verbose_name='Nome')
@@ -8,7 +8,9 @@ class Produto(models.Model):
     precoProduto     = models.DecimalField(blank=False,default=0, decimal_places=2,max_digits=999999, verbose_name='Preço')
 
     def __str__(self):
-        return f'{self.nomeProduto}'
+        return f'{self.nomeProduto} R${self.precoProduto}'
+    
+
     
 class VariacaoProduto(models.Model):
     '''Aqui será cadastrada a variação com base em um obj de Produtos'''

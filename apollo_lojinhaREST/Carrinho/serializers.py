@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Carrinho, ItemCarrinho
-from Carrinho.validators import estado_validator,variacaoNoEstoque_validator, quantidade_validator
+from Carrinho.validators import estado_validator,variacao_validator, quantidade_validator
 
 class CarrinhoSerializer(serializers.ModelSerializer):
     class Meta: 
@@ -10,17 +10,20 @@ class CarrinhoSerializer(serializers.ModelSerializer):
             if not estado_validator(dados['estado']):
                 raise serializers.ValidationError({'estado':'Não pode adicionar produtos em carrinhos fechados.'})
             return dados
+        
+        
 class ItemCarrinhoSerializer(serializers.ModelSerializer):
     class Meta:
         model  = ItemCarrinho
         fields = '__all__'
+
     def validate(self, dados):
-        if not variacaoNoEstoque_validator(dados['quantidade']):
-            raise serializers.ValidationError({'quantidade': 'Sinto muito. Este produto não está em estoque.'})
-        if not quantidade_validator(dados['quantidade']):
-            raise serializers.ValidationError({'quantidade': 'Coloque no mínimo 1 produto.'})
+        
+        if not quantidade_validator(dados['quantidade'], dados['variacao']):
+            raise serializers.ValidationError({'quantidade': 'Não temos estoque o suficiente.'})
+        
         return dados
-            
+                
 
 class ListaCarrinhoPorContaSerializer(serializers.ModelSerializer):
     aberturaCarrinhoData = serializers.ReadOnlyField(source='carrinhoData')

@@ -1,19 +1,25 @@
-'''
-Validators para o carrinho
-'''
+# carrinho--------------------------------------
+def usuario_validator(usuario):
+    pass
+
 
 def estado_validator(estado:str):
-    if estado == 'C' or estado == 'F':
-        return False
-    return True
-    
-
-def variacaoNoEstoque_validator(variacao):
-    if variacao['estoqueProduto'] < 1: # talvez tenha errado o dict
+    if estado == 'C' or estado == 'F': # carrinho F só pode ser atualizado, não criado.
         return False
     return True
 
-def quantidade_validator(quantidade: int):
-    if quantidade < 1:
+
+def carrinhoData_validator(carrinhoData):
+    pass
+
+
+# itemCarrinho----------------------------------------------------
+def variacao_validator(variacao):
+    pass
+
+
+def quantidade_validator(quantidade: int, variacao):
+    print(f"AQUIIIIIIIIIIIIIII --------------------> {variacao.estoqueProduto}")
+    if quantidade > variacao.estoqueProduto:
         return False
     return True

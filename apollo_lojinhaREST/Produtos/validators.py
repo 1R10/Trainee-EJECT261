@@ -1,12 +1,12 @@
-'''
-Validators de produtos e suas variações.
-'''
+# produto base----------------------------------------------------------------
 def nomeProduto_valido(nomeProduto:str):
     if not (nomeProduto.replace(' ', '')).isalpha():
         return False
     return True
 
-# descriçãoProduto não tem o que fazer.
+
+def descriçãoProduto_valido(descriçãoProduto):
+    pass
 
 def precoProduto_valido(precoProduto: float):
     if precoProduto == None:
@@ -16,11 +16,15 @@ def precoProduto_valido(precoProduto: float):
     
     return True
 
-# tamanhoProduto não tem o que fazer.
+# variação-----------------------------------------------------------------------------
+
+def tamanhoProduto_valido(tamanhoProduto: str):
+    pass
 
 def corProduto_valido(corProduto:str):
     if not (corProduto.replace(' ', '').replace(',', '')).isalnum(): # alphanum em caso do front add tabulação de cor com número
         return False
     return True
 
-# já validado em models
+def estoqueProduto_valido(estoqueProduto: int):
+    pass
