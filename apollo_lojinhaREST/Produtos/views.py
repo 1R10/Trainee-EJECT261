@@ -25,7 +25,7 @@ class VariacaoProdutoViewSets(viewsets.ModelViewSet):
             self.permission_classes = [PermissionLojista]
         else:
             self.permission_classes = []
-            
+
         return super().get_permissions()
     
     queryset = VariacaoProduto.objects.all().order_by('id')
@@ -33,5 +33,5 @@ class VariacaoProdutoViewSets(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter, filters.SearchFilter]
     ordering_fields = ['produto', 'estoqueProduto']
     search_fields   = ['produto']
-    ordering = ['produto', 'estoqueProduto'] # ordenação padrão
+    ordering = ['produto'] # ordenação padrão
     
