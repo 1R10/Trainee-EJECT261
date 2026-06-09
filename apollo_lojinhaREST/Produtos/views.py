@@ -6,10 +6,11 @@ from Contas.permissions import PermissionLojista
 
 class ProdutosViewSets(viewsets.ModelViewSet):  
     def get_permissions(self):
-        if self.request.method in ['POST', 'PUT', 'PATCH', 'DELETE', 'GET']:
+        if self.request.method in ['POST', 'PUT', 'PATCH', 'DELETE']:
             self.permission_classes = [PermissionLojista]
         else:
-            self.permission_classes = [IsAuthenticated]
+            self.permission_classes = []
+
         return super().get_permissions()
     
     queryset = Produto.objects.all().order_by('precoProduto').order_by('id')
@@ -23,7 +24,8 @@ class VariacaoProdutoViewSets(viewsets.ModelViewSet):
         if self.request.method in ['POST', 'PUT', 'PATCH', 'DELETE']:
             self.permission_classes = [PermissionLojista]
         else:
-            self.permission_classes = [IsAuthenticated]
+            self.permission_classes = []
+            
         return super().get_permissions()
     
     queryset = VariacaoProduto.objects.all().order_by('id')
@@ -31,5 +33,5 @@ class VariacaoProdutoViewSets(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter, filters.SearchFilter]
     ordering_fields = ['produto', 'estoqueProduto']
     search_fields   = ['produto']
-    ordering = ['produto'] # ordenação padrão
+    ordering = ['produto', 'estoqueProduto'] # ordenação padrão
     

@@ -2,7 +2,21 @@ from Contas.serializers import ContaPadraoSerializer, ContaPadrao
 from rest_framework import viewsets, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAuthenticated
+from Contas.permissions import PermissionLojista, PermissionCliente
+
 class ContaPadraoViewSets(viewsets.ModelViewSet):
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            self.permission_classes = [PermissionLojista]
+        elif self.request.method in ['PUT', 'PATCH']: # ainda consigo acessar outra conta :(
+            self.permission_classes = [PermissionCliente]
+        elif self.request.method == 'POST':
+            self.permission_classes = []
+        else:
+            self.permission_classes = [IsAuthenticated]
+            
+        return super().get_permissions()
   
     queryset = ContaPadrao.objects.all().order_by('id')
     serializer_class = ContaPadraoSerializer
