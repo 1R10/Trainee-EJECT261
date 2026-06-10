@@ -33,7 +33,7 @@ class ItemCarrinhoViewSets(viewsets.ModelViewSet): # nao precisa de filtro de pa
     serializer_class = ItemCarrinhoSerializer
 
 class ListaCarrinhoPorContaViewSet(generics.ListAPIView):
-    permission_classes = [IsAuthenticated, PermissionLojista or PermissionCliente]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         queryset = Carrinho.objects.filter(usuario_id=self.kwargs['pkcontas']).order_by('id') # primary key
@@ -41,7 +41,7 @@ class ListaCarrinhoPorContaViewSet(generics.ListAPIView):
     serializer_class = ListaCarrinhoPorContaSerializer
 
 class ListaItemPorCarrinhoViewSet(generics.ListAPIView):
-    permission_classes = [IsAuthenticated, PermissionLojista or PermissionCliente]
+    permission_classes = [IsAuthenticated]
     def get_queryset(self):
         queryset = ItemCarrinho.objects.filter(carrinho_id=self.kwargs['pkcarrinhos']).order_by('id') # n podem existir 2 pk's na mesma url
         return queryset

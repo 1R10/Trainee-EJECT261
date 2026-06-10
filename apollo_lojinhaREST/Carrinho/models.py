@@ -22,4 +22,4 @@ class ItemCarrinho(models.Model):
     quantidade = models.PositiveIntegerField(default=1, verbose_name='Quantidade')
     
     def __str__(self):
-        return f'{self.produto} x {self.quantidade}'
+        return f'{self.produto} x {self.quantidade} = {self.quantidade * self.produto.precoProduto}'
