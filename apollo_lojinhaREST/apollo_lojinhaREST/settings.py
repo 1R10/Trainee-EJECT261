@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'Contas',
     'Produtos',
     'Carrinho',
+    'Pedidos',
     'rest_framework',
     'django_filters',   
     
