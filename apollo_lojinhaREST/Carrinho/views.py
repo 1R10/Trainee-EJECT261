@@ -3,8 +3,9 @@ from .serializers import (
     ListaCarrinhoPorContaSerializer, ListaItemPorCarrinhoSerializer)
 from rest_framework import viewsets, generics, filters
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.permissions import IsAuthenticated
-from Contas.permissions import PermissionCliente, PermissionLojista
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from Contas.permissions import PermissionCliente, PermissionLojista, PermissionClienteSelf
+
 
 class CarrinhoViewSets(viewsets.ModelViewSet):
     queryset = Carrinho.objects.all().order_by('id')
@@ -13,6 +14,8 @@ class CarrinhoViewSets(viewsets.ModelViewSet):
     ordering_fields = ['estado','carrinhoData']
     search_fields = ['carrinhoData']
     ordering = ['carrinhoData']
+    filterset_fields = ['estado', 'carrinhoData']
+    permission_classes = [AllowAny]
     
     
 class ItemCarrinhoViewSets(viewsets.ModelViewSet): # nao precisa de filtro de paginacao

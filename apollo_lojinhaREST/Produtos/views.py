@@ -1,7 +1,7 @@
 from Produtos.serializers import ProdutosSerializer, Produto, VariacaoProdutoSerializer, VariacaoProduto
 from rest_framework import viewsets, filters
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from Contas.permissions import PermissionLojista
 
 class ProdutosViewSets(viewsets.ModelViewSet):  
@@ -18,6 +18,8 @@ class ProdutosViewSets(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
     ordering_fields = ['nomeProduto', 'precoProduto']
     ordering = ['nomeProduto'] # ordenação padrão
+    filterset_fields = ['nomeProduto', 'precoProduto']
+    permission_classes = [AllowAny]
 
 class VariacaoProdutoViewSets(viewsets.ModelViewSet):  
     def get_permissions(self):
@@ -34,4 +36,5 @@ class VariacaoProdutoViewSets(viewsets.ModelViewSet):
     ordering_fields = ['produto', 'estoqueProduto']
     search_fields   = ['produto']
     ordering = ['produto'] # ordenação padrão
+    
     

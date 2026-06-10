@@ -24,6 +24,7 @@ class ContaPadraoViewSets(viewsets.ModelViewSet):
     ordering_fields = ['nome_completo', 'id']
     search_fields   = ['nome_completo', 'cpf']
     ordering = ['nome_completo'] # ordenação padrão
+    filterset_fields = ['role', 'cpf']
     permission_classes = [AllowAny]
 
 
