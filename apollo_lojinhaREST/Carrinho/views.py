@@ -17,7 +17,7 @@ class CarrinhoViewSets(viewsets.ModelViewSet):
     
 class ItemCarrinhoViewSets(viewsets.ModelViewSet): # nao precisa de filtro de paginacao
     def get_permissions(self):
-        if self.request.method == 'DELETE': # Se o estoque acabar, o lojista deve deletar automaticamente
+        if self.request.method == 'DELETE':
             self.permission_classes = [PermissionLojista, PermissionCliente]
         if self.request.method in ['POST', 'PUT', 'PATCH']:
             self.permission_classes = [PermissionCliente]

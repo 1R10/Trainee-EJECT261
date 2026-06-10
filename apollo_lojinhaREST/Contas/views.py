@@ -3,19 +3,19 @@ from rest_framework import viewsets, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
-from Contas.permissions import PermissionLojista, PermissionCliente
+from Contas.permissions import PermissionLojista, PermissionCliente, PermissionClienteSelf
 
 class ContaPadraoViewSets(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.request.method == 'GET':
-            self.permission_classes = [PermissionLojista]
+            self.permission_classes = [PermissionClienteSelf]
         elif self.request.method in ['PUT', 'PATCH']: # ainda consigo acessar outra conta :(
-            self.permission_classes = [PermissionCliente]
+            self.permission_classes = [PermissionClienteSelf]
         elif self.request.method == 'POST':
             self.permission_classes = []
         else:
             self.permission_classes = [IsAuthenticated]
-            
+
         return super().get_permissions()
   
     queryset = ContaPadrao.objects.all().order_by('id')
