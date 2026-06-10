@@ -26,4 +26,4 @@ class VariacaoProduto(models.Model):
     estoqueProduto     = models.PositiveIntegerField(default=0, verbose_name='Estoque') # ver um jeito de associar com produto e somar total
 
     def __str__(self):
-        return f'{self.produto.nomeProduto} - {self.corProduto} - {self.tamanhoProduto} - {self.estoqueProduto}'
+        return f'{self.produto.nomeProduto} - {self.corProduto} - {self.tamanhoProduto}'
