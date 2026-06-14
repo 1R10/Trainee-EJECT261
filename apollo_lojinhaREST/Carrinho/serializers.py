@@ -15,7 +15,9 @@ class CarrinhoSerializer(serializers.ModelSerializer):
 class ItemCarrinhoSerializer(serializers.ModelSerializer):
     class Meta:
         model  = ItemCarrinho
-        fields = '__all__'
+        exclude = ['produto']
+
+        
 
     def validate(self, dados):
         
