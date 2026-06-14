@@ -3,6 +3,9 @@ from Contas.models import ContaPadrao
 from Produtos.models import Produto,VariacaoProduto
 
 class Carrinho(models.Model):
+    '''
+    Abre o carrinho para um usuário específico
+    '''
     ESTADO = (
         ('A', 'Aberto'),   # Carrinho atual
         ('F', 'Fechado'),  # Histórico de compras

@@ -8,6 +8,21 @@ from Contas.permissions import PermissionCliente, PermissionLojista, PermissionC
 
 
 class CarrinhoViewSets(viewsets.ModelViewSet):
+    def get_permissions(self):
+        '''
+        Permissões de Carrinho:
+        Lojista: get
+        Cliente: get, post, put, patch, delete
+        Qualquer um: apenas logado.
+        '''
+        if self.request.method in ['GET']:
+            self.permission_classes = [PermissionClienteSelf, PermissionLojista]
+        if self.request.method in ['POST', 'PUT', 'PATCH', 'DELETE']:
+            self.permission_classes = [PermissionClienteSelf]
+        return super().get_permissions()
+
+
+
     queryset = Carrinho.objects.all().order_by('id')
     serializer_class = CarrinhoSerializer
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter, filters.SearchFilter]
@@ -15,11 +30,17 @@ class CarrinhoViewSets(viewsets.ModelViewSet):
     search_fields = ['carrinhoData']
     ordering = ['carrinhoData']
     filterset_fields = ['estado', 'carrinhoData']
-    permission_classes = [AllowAny]
+    
     
     
 class ItemCarrinhoViewSets(viewsets.ModelViewSet): # nao precisa de filtro de paginacao
     def get_permissions(self):
+        '''
+        Permissões de Item por carrinho
+        Lojista: delete
+        Cliente: post, put, patch, delete
+        Qualquer um: get
+        '''
         if self.request.method == 'DELETE':
             self.permission_classes = [PermissionLojista, PermissionCliente]
         if self.request.method in ['POST', 'PUT', 'PATCH']:
@@ -29,11 +50,21 @@ class ItemCarrinhoViewSets(viewsets.ModelViewSet): # nao precisa de filtro de pa
             self.permission_classes = [IsAuthenticated]
         return super().get_permissions()
     
-    queryset = ItemCarrinho.objects.all().order_by('id')
+    queryset = ItemCarrinho.objects.all().order_by('variacao')
     serializer_class = ItemCarrinhoSerializer
 
 class ListaCarrinhoPorContaViewSet(generics.ListAPIView):
-    permission_classes = [IsAuthenticated]
+    def get_permissions(self):
+        '''
+        Permissões de Carrinho por Conta:
+        Lojista: get 
+        Cliente: get - conta dele
+        Qualquer um: nenhuma permissão
+        '''
+        if self.request.method == 'get':
+            self.permission_classes = [PermissionClienteSelf, PermissionLojista]
+
+        return super().get_permissions()
 
     def get_queryset(self):
         queryset = Carrinho.objects.filter(usuario_id=self.kwargs['pkcontas']).order_by('id') # primary key
