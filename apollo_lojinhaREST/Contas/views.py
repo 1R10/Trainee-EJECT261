@@ -6,10 +6,15 @@ from rest_framework.permissions import IsAuthenticated
 from Contas.permissions import PermissionLojista, PermissionCliente, PermissionClienteSelf
 
 class ContaPadraoViewSets(viewsets.ModelViewSet):
+    '''
+    Recebe permissões de acesso das contas.
+    Filtra por nome completo ou role (Lojista/CLiente)
+
+    '''
     def get_permissions(self):
         if self.request.method == 'GET':
             self.permission_classes = [PermissionClienteSelf]
-        elif self.request.method in ['PUT', 'PATCH']: # ainda consigo acessar outra conta :(
+        elif self.request.method in ['PUT', 'PATCH']:
             self.permission_classes = [PermissionClienteSelf]
         elif self.request.method == 'POST':
             self.permission_classes = []
@@ -24,7 +29,7 @@ class ContaPadraoViewSets(viewsets.ModelViewSet):
     ordering_fields = ['nome_completo', 'id']
     search_fields   = ['nome_completo', 'cpf']
     ordering = ['nome_completo'] # ordenação padrão
-    filterset_fields = ['role', 'cpf']
+    filterset_fields = ['role', 'nome_completo']
     permission_classes = [AllowAny]
 
 

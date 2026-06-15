@@ -17,15 +17,14 @@ class ItemCarrinhoSerializer(serializers.ModelSerializer):
         model  = ItemCarrinho
         exclude = ['produto']
 
-        
-
     def validate(self, dados):
-        
+        dados['produto'] = dados['variacao'].produto
         if not quantidade_validator(dados['quantidade'], dados['variacao']):
             raise serializers.ValidationError({'quantidade': 'Não temos estoque o suficiente.'})
-        
+
         return dados
-                
+    def create(self, validated_data):
+            return ItemCarrinho.objects.create(**validated_data)                
 
 class ListaCarrinhoPorContaSerializer(serializers.ModelSerializer):
     aberturaCarrinhoData = serializers.ReadOnlyField(source='carrinhoData')

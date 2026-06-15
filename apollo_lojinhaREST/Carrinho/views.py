@@ -9,7 +9,7 @@ from Contas.permissions import PermissionCliente, PermissionLojista, PermissionC
 
 class CarrinhoViewSets(viewsets.ModelViewSet):
     def get_permissions(self):
-        '''
+        ''' 
         Permissões de Carrinho:
         Lojista: get
         Cliente: get, post, put, patch, delete
@@ -41,15 +41,15 @@ class ItemCarrinhoViewSets(viewsets.ModelViewSet): # nao precisa de filtro de pa
         Cliente: post, put, patch, delete
         Qualquer um: get
         '''
-        if self.request.method == 'DELETE':
-            self.permission_classes = [PermissionLojista, PermissionCliente]
+    
         if self.request.method in ['POST', 'PUT', 'PATCH']:
             self.permission_classes = [PermissionCliente]
-
+        elif self.request.method == 'DELETE':
+            self.permission_classes = [PermissionCliente, PermissionLojista]
         else:
             self.permission_classes = [IsAuthenticated]
         return super().get_permissions()
-    
+        
     queryset = ItemCarrinho.objects.all().order_by('variacao')
     serializer_class = ItemCarrinhoSerializer
 

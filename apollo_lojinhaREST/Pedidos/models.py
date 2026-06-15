@@ -35,7 +35,7 @@ class PedidoModel(models.Model):
         Valor: R${self.valorPedido}
         Status: {self.statusPedido}
         itens: {self.itensPedido.variacao}
-'''
+                '''
         print(recibo)
         return recibo
     

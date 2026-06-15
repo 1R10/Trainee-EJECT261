@@ -1,4 +1,4 @@
-from rest_framework.permissions import BasePermission
+from rest_framework.permissions import BasePermission, IsAuthenticated
 
 class PermissionLojista(BasePermission):
     '''Checa a role da conta para liberar a permissão de lojista'''
@@ -12,15 +12,12 @@ class PermissionCliente(BasePermission):
     
 class PermissionClienteSelf(BasePermission):
     """
-    Permite que o cliente apenas visualize contaPadrao se for o dono.
-    Bloqueia request se não for o dono da conta.
+    Permite acesso apenas ao próprio usuário ou Lojista.
     """
-    
-    def has_object_permission(self, request, view, obj):
-        '''
-        Só retorna true se user = pessoa logada
-        '''
-        print('RODOU --------------- AQUIIII ALOOO')
 
+    def has_permission(self, request, view):
+        return request.user.is_authenticated
+
+    def has_object_permission(self, request, view, obj):
         return obj == request.user or request.user.role == 'L'
     

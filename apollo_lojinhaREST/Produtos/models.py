@@ -21,9 +21,13 @@ class VariacaoProduto(models.Model):
         ('m' , 'M'),
         ('g' , 'G'),
     )  
+    ATIVIDADEPRODUTO   =(
+        ('ativo', True),
+        ('inativo', False),
+    )
     tamanhoProduto     = models.CharField(default='m',choices=TAMANHOPRODUTO, blank= False, verbose_name='Tamanho') 
     corProduto         = models.CharField(blank= False, verbose_name='Cor')
-    estoqueProduto     = models.PositiveIntegerField(default=0, verbose_name='Estoque') # ver um jeito de associar com produto e somar total
-
+    estoqueProduto     = models.PositiveIntegerField(default=0, verbose_name='Estoque', blank=False) # ver um jeito de associar com produto e somar total
+    atividadeProduto   = models.TextField(choices=ATIVIDADEPRODUTO, default='ativo', verbose_name='Ativo')
     def __str__(self):
         return f'{self.produto.nomeProduto} - {self.produto.precoProduto} - {self.corProduto} - {self.tamanhoProduto}'
