@@ -14,6 +14,12 @@ class Carrinho(models.Model):
     usuario      = models.ForeignKey(ContaPadrao, on_delete=models.CASCADE, verbose_name='usuario') # Usuário deletado, carrinho também.
     estado       = models.CharField(choices=ESTADO, default='A', max_length=1, verbose_name='Estado')
     carrinhoData = models.DateField(auto_now_add=True, verbose_name='Abertura')
+    PAGAMENTO = (
+    ('picx', 'Pix'),
+    ('cred', 'Crédito'),
+    ('debt', 'Débito')
+    )
+    pagamentoPedido = models.TextField(choices=PAGAMENTO, blank=False, verbose_name='Forma de pagamento')
 
     def __str__(self):
         return f'{self.usuario} - {self.estado} - {self.carrinhoData}'

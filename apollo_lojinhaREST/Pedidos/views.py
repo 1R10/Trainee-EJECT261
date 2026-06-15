@@ -8,16 +8,19 @@ from Pedidos.serializers import PedidoSerializer
 class PedidosViewsets(viewsets.ModelViewSet):
     def get_permissions(self):
         ''' 
-        Apenas Lojistas podem acessar e administrar pedidos.
+        Apenas Lojistas podem acessar e administrar pedidos. Clientes podem ver
         '''
-        self.permission_classes = [PermissionLojista]
+        if self.request.user == 'GET':
+            self.permission_classes = [PermissionClienteSelf, PermissionLojista]
+        else:
+            self.permission_classes = [PermissionLojista]
         return super().get_permissions()
     
-    queryset = PedidoModel.objects.filter().order_by('statusPedido')
+    queryset = PedidoModel.objects.filter().order_by('dataPedido')
     serializer_class = PedidoSerializer
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter, filters.SearchFilter]
     ordering_fields = ['dataPedido','carrinhoData']
     search_fields = ['statusPedido','pagamentoPedido','carrinho', 'dataPedido']
-    ordering = ['statusPedido']
+    ordering = ['dataPedido']
     filterset_fields = ['dataPedido', 'statusPedido']
 

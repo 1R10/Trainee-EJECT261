@@ -7,10 +7,11 @@ def SuporteSignals(sender, instance, created, **kwargs):
         corpo_email = f'''
         Nome: {instance.nomeSuporte}
         Email: {instance.emailSuporte}
+        Assunto: {instance.assuntoSuporte}
         Mensagem:
         {instance.mensagemSuporte}
         '''
-        # falta coisa. pesquisar mais
+        print('\n\n\nRODOU\n\n\n')
         
 
 post_save.connect(SuporteSignals, sender=ContatarSuporte)

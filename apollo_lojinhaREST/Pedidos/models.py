@@ -15,14 +15,17 @@ class PedidoModel(models.Model):
     
     dataPedido      = models.DateField(auto_now_add=True, verbose_name='Data de abertura')
     statusPedido    = models.TextField(choices=STATUS, blank=False, verbose_name='Status')
-    pagamentoPedido = models.TextField(choices=PAGAMENTO, blank=False, verbose_name='Forma de pagamento')
     carrinho        = models.ForeignKey(Carrinho, on_delete=models.CASCADE, verbose_name='Carrinho')
+
+    def enderecoEntrega(self):
+        return self.carrinho.usuario.endereco
 
     def valorPedido(self):
         itens = self.carrinho.itemcarrinho_set.all()
         total = 0
         for item in itens:
             total += item.variacao.produto.precoProduto * item.quantidade
+
         return total
     
 

@@ -15,6 +15,7 @@ class ProdutosSerializer(serializers.ModelSerializer):
         return dados
 
 class VariacaoProdutoSerializer(serializers.ModelSerializer):
+    nomeProduto = serializers.ReadOnlyField(source='produto.nomeProduto')
     class Meta: 
         model = VariacaoProduto
         fields = '__all__'
