@@ -8,6 +8,6 @@ class PedidoSerializer(serializers.ModelSerializer):
 
         def validate(self, dados):
                 '''
-                Ainda não há dados a serem validados
+                Ainda não há dados a serem validados ainda
                 '''
                 return dados

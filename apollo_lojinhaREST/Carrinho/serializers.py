@@ -13,6 +13,9 @@ class CarrinhoSerializer(serializers.ModelSerializer):
         
         
 class ItemCarrinhoSerializer(serializers.ModelSerializer):
+    produtoNome     = serializers.ReadOnlyField(source='produto.nomeProduto')
+    variacaoCor     = serializers.ReadOnlyField(source='variacao.corProduto')
+    variacaoTamanho = serializers.ReadOnlyField(source='variacao.tamanhoProduto')
     class Meta:
         model  = ItemCarrinho
         exclude = ['produto']
