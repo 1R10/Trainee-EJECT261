@@ -23,10 +23,10 @@ class CarrinhoViewSets(viewsets.ModelViewSet):
 
 
 
-    queryset = Carrinho.objects.all().order_by('id')
+    queryset = Carrinho.objects.filter().order_by('id')
     serializer_class = CarrinhoSerializer
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter, filters.SearchFilter]
-    ordering_fields = ['estado','carrinhoData']
+    ordering_fields = ['estado','pagamentoPedido']
     search_fields = ['carrinhoData']
     ordering = ['carrinhoData']
     filterset_fields = ['estado', 'carrinhoData']

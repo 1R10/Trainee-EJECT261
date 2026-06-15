@@ -3,6 +3,7 @@ from django.urls import path, include
 from Contas.views import ContaPadraoViewSets
 from Produtos.views import ProdutosViewSets, VariacaoProdutoViewSets
 from Carrinho.views import CarrinhoViewSets, ItemCarrinhoViewSets, ListaCarrinhoPorContaViewSet, ListaItemPorCarrinhoViewSet
+from Pedidos.views import PedidosViewsets
 from rest_framework import routers
 from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
 from drf_yasg.views import get_schema_view
@@ -26,6 +27,7 @@ router.register('products', ProdutosViewSets, basename='Produtos')
 router.register('variations', VariacaoProdutoViewSets, basename='Variação de produto')
 router.register('cart', CarrinhoViewSets, basename='Carrinhos')
 router.register('itemCarrinho', ItemCarrinhoViewSets, basename='Itens  no carrinho')
+router.register('orders', PedidosViewsets, basename='Pedidos' )
 
 
 
