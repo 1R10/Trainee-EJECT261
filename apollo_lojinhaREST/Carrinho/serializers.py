@@ -5,7 +5,7 @@ from Carrinho.validators import estado_validator,variacao_validator, quantidade_
 class CarrinhoSerializer(serializers.ModelSerializer):
     class Meta: 
         model  = Carrinho
-        fields = '__all__'
+        exclude = ['estado']
         def validate(self, dados):
             if not estado_validator(dados['estado']):
                 raise serializers.ValidationError({'estado':'Não pode adicionar produtos em carrinhos fechados.'})
