@@ -13,12 +13,13 @@ class ProdutosViewSets(viewsets.ModelViewSet):
 
         return super().get_permissions()
     
-    queryset = Produto.objects.all().order_by('precoProduto').order_by('id')
+    queryset = Produto.objects.filter(ativoProduto=True).order_by('precoProduto') # antes objects.all
     serializer_class = ProdutosSerializer
-    filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
+    filter_backends = [DjangoFilterBackend,filters.OrderingFilter, filters.SearchFilter]
     ordering_fields = ['nomeProduto', 'precoProduto']
     ordering = ['nomeProduto'] # ordenação padrão
     filterset_fields = ['nomeProduto', 'precoProduto']
+    search_fields = ['nomeProduto', 'precoProduto']
     permission_classes = [AllowAny]
 
 class VariacaoProdutoViewSets(viewsets.ModelViewSet):  
@@ -33,8 +34,10 @@ class VariacaoProdutoViewSets(viewsets.ModelViewSet):
     queryset = VariacaoProduto.objects.all().order_by('id')
     serializer_class = VariacaoProdutoSerializer
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter, filters.SearchFilter]
-    ordering_fields = ['produto', 'estoqueProduto']
-    search_fields   = ['produto']
-    ordering = ['produto'] # ordenação padrão
+    ordering_fields = ['tamanhoProduto', 'corProduto']
+    ordering = ['tamanhoProduto', 'corProduto'] # ordenação padrão
+    filterset_fields = ['tamanhoProduto', 'corProduto']
+    search_fields = ['tamanhoProduto', 'corProduto']
+    permission_classes = [AllowAny]
     
     

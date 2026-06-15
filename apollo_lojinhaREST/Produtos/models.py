@@ -6,6 +6,7 @@ class Produto(models.Model):
     nomeProduto      = models.CharField(max_length=200, blank= False, verbose_name='Nome')
     descricaoProduto = models.TextField(verbose_name='Descrição', max_length=300)
     precoProduto     = models.DecimalField(blank=False,default=0, decimal_places=2,max_digits=999999, verbose_name='Preço')
+    ativoProduto     = models.BooleanField(default=False, verbose_name='Ativo')
 
     def __str__(self):
         return f'{self.nomeProduto} R${self.precoProduto}'
@@ -16,18 +17,14 @@ class VariacaoProduto(models.Model):
     '''Aqui será cadastrada a variação com base em um obj de Produtos'''
 
     produto           = models.ForeignKey(Produto, on_delete=models.CASCADE, verbose_name='Produto')
-    TAMANHOPRODUTO   = (
+    TAMANHOPRODUTO    = (
         ('p' , 'P'),
         ('m' , 'M'),
         ('g' , 'G'),
     )  
-    ATIVIDADEPRODUTO   =(
-        ('ativo', True),
-        ('inativo', False),
-    )
+
     tamanhoProduto     = models.CharField(default='m',choices=TAMANHOPRODUTO, blank= False, verbose_name='Tamanho') 
     corProduto         = models.CharField(blank= False, verbose_name='Cor')
     estoqueProduto     = models.PositiveIntegerField(default=0, verbose_name='Estoque', blank=False) # ver um jeito de associar com produto e somar total
-    atividadeProduto   = models.TextField(choices=ATIVIDADEPRODUTO, default='ativo', verbose_name='Ativo')
     def __str__(self):
         return f'{self.produto.nomeProduto} - {self.produto.precoProduto} - {self.corProduto} - {self.tamanhoProduto}'
